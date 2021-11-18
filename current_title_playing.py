@@ -15,6 +15,7 @@ driver = webdriver.Firefox(options=options)
 
 # Webradio scrapped
 RADIO_URL = "https://www.radioking.com/widgets/player/player.php?id=444"
+FAULTY_RADIOKING_RESULT = "Radio 17bis"
 
 # Deezer oAuth URLs used
 DEEZER_AUTH_PAGE="https://connect.deezer.com/oauth/auth.php?"
@@ -82,7 +83,7 @@ while True:
     get_refreshed_page()
     artiste,titre = get_song_info()
     # sometimes radioking returns only the name of the radio with the song name or not
-    if artiste != old_artiste and old_titre is not None and old_titre != titre and artiste != "Radio 17bis":
+    if artiste != old_artiste and old_titre is not None and old_titre != titre and artiste != FAULTY_RADIOKING_RESULT:
        print(f' {get_time()} : {artiste} - {titre} - {deezer_song_url(artiste,titre)}')
        old_artiste=artiste
        old_titre=titre
