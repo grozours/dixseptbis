@@ -67,7 +67,7 @@ old_artiste=artiste
 old_titre=titre
 
 while True:
-    time.sleep(20)
+    time.sleep(45)
     get_refreshed_page()
     artiste,titre = get_song_info()
     if artiste != old_artiste and old_titre is not None and old_titre != titre and "17bis" not in artiste:
