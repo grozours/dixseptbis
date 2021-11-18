@@ -69,15 +69,13 @@ DEEZER_TOKEN = (token_result.text.split("&expires")[0]).split("access_token=")[1
 # Use token with deezer python client
 dz_client = deezer.Client(access_token=DEEZER_TOKEN)
 
-
 print(f'\n Radio 17Bis Playlist :\n')
+
+old_artiste=""
+old_titre=""
 
 get_first_content(RADIO_URL)
 artiste,titre = get_song_info()
-print(f' {get_time()} : {artiste} - {titre} - {deezer_song_url(artiste,titre)}')
-
-old_artiste=artiste
-old_titre=titre
 
 while True:
     time.sleep(45)
