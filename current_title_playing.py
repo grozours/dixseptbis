@@ -70,7 +70,7 @@ DEEZER_TOKEN = (token_result.text.split("&expires")[0]).split("access_token=")[1
 # Use token with deezer python client
 dz_client = deezer.Client(access_token=DEEZER_TOKEN)
 
-print(f'\n Radio 17Bis Playlist :\n')
+print(f'\n {FAULTY_RADIOKING_RESULT} Playlist :\n')
 
 old_artiste=""
 old_titre=""
