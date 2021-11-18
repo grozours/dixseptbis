@@ -40,7 +40,20 @@ def get_time():
     return now.strftime("%Y%m%d-%H%M%S")
 
 def deezer_song_url(artiste,titre):
-    return (dz_client.search(query=titre,artist=artiste,track=titre))[0].link
+    # special characters "&" and "(" are sometimes usable as search on deezer api
+    if "&" in artiste:
+       artiste=artiste.split("&")[0]
+    if "(" in artiste:
+       artiste=artiste.split("(")[0]
+    if "&" in titre:
+       titre=titre.split("&")[0]
+    if "(" in titre:
+       titre=titre.split("(")[0]
+    track_list=dz_client.search(artist=artiste,track=titre)
+    if not len(track_list) == 0:
+       return track_list[0].link
+    else:
+       return "unknown"
 
 
 # Getting through oAuth Deezer process
@@ -70,7 +83,8 @@ while True:
     time.sleep(45)
     get_refreshed_page()
     artiste,titre = get_song_info()
-    if artiste != old_artiste and old_titre is not None and old_titre != titre and "17bis" not in artiste:
+    # sometimes radioking returns only the name of the radio with the song name or not
+    if artiste != old_artiste and old_titre is not None and old_titre != titre and artiste != "Radio 17bis":
        print(f' {get_time()} : {artiste} - {titre} - {deezer_song_url(artiste,titre)}')
        old_artiste=artiste
        old_titre=titre
