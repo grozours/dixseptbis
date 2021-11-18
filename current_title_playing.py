@@ -40,7 +40,7 @@ def get_time():
     return now.strftime("%Y%m%d-%H%M%S")
 
 def deezer_song_url(artiste,titre):
-    return dz_client.search(query=titre,artist=artiste,track=titre)[0].link
+    return (dz_client.search(query=titre,artist=artiste,track=titre))[0].link
 
 
 # Getting through oAuth Deezer process
