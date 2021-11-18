@@ -52,9 +52,13 @@ def deezer_song_url(artiste,titre):
        titre=titre.split("(")[0]
     track_list=dz_client.search(artist=artiste,track=titre)
     if not len(track_list) == 0:
+       for track in track_list:
+           if "(" not in track.title:
+              return track.link
        return track_list[0].link
     else:
        return "unknown"
+
 
 
 # Getting through oAuth Deezer process
